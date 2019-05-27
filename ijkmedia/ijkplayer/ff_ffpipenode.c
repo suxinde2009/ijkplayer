@@ -1,6 +1,7 @@
 /*
  * ff_ffpipeline_vdec.c
  *
+ * Copyright (c) 2003 Bilibili
  * Copyright (c) 2003 Fabrice Bellard
  * Copyright (c) 2014 Zhang Rui <bbcallen@gmail.com>
  *
@@ -75,4 +76,12 @@ void ffpipenode_free_p(IJKFF_Pipenode **node)
 int ffpipenode_run_sync(IJKFF_Pipenode *node)
 {
     return node->func_run_sync(node);
+}
+
+int ffpipenode_flush(IJKFF_Pipenode *node)
+{
+    if (!node || !node->func_flush)
+        return 0;
+
+    return node->func_flush(node);
 }
